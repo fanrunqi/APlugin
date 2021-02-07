@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'APlugin'
+//    id 'APlugin'
 }
 
 android {
@@ -46,5 +46,5 @@ dependencies {
 
     implementation project(':lib_router')
     implementation project(':module_a')
-//    implementation 'com.github.fanrunqi:APlugin:0.01'
+//    implementation 'com.github.fanrunqi:APlugin:0.02'
 }
