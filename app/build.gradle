@@ -46,4 +46,5 @@ dependencies {
 
 //    implementation project(':lib_router')
     implementation project(':module_a')
+//    implementation 'com.github.fanrunqi:APlugin:0.02'
 }
