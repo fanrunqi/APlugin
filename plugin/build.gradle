@@ -13,6 +13,8 @@ dependencies {
 }
 repositories {
     mavenCentral()
+    google()
+    jcenter()
 }
 
 sourceSets {
