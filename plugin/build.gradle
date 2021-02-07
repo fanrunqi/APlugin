@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'groovy'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:4.1.0'
+    implementation 'com.android.tools.build:gradle-api:4.1.0'
+    implementation 'org.ow2.asm:asm:7.1'
+    implementation 'org.ow2.asm:asm-util:7.1'
+    implementation 'org.ow2.asm:asm-commons:7.1'
+}
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += ['src/main/java']
+        }
+        groovy {
+            srcDirs += ['src/main/groovy']
+        }
+    }
+}
+
+
+group = 'cn.leo'
+archivesBaseName = 'aplugin'
+version = '0.0.1'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../plugin_libs'))
+        }
+    }
+}
