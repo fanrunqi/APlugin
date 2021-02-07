@@ -4,17 +4,17 @@ buildscript {
     repositories {
         google()
         jcenter()
-//        maven {
+        maven {
+            url 'https://jitpack.io'
 //            url(uri('./plugin_libs'))
-//        }
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 //        classpath "cn.leo:aplugin:0.0.1"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+//        classpath 'com.github.fanrunqi:APlugin:0.01'
     }
 }
 
@@ -22,6 +22,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
