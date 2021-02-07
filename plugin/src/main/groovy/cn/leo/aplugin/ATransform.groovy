@@ -80,8 +80,8 @@ class ATransform extends Transform {
                                 jarInput.scopes,
                                 Format.JAR
                         )
-
-                        if (jarInputFileName.contains(Constant.JAR_INPUT_MATCH_SUFFIX)) {
+//                        println('ATransform jar name =' + jarInputFileName)
+                        if (jarInputFileName.contains(Constant.FUNCTION_ROUTER_JAR_INPUT_MATCH_SUFFIX)) {
                             mDestFile = destJar
                             mJarInput = jarInputFile
                         } else {

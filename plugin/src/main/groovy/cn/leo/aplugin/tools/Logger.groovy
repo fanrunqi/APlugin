@@ -19,14 +19,10 @@ class Logger {
     static void printCopyright() {
         println()
         println("${LogUI.C_BLACK_GREEN.value}" + "####################################################################" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                                                              ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                                                              ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                     欢迎使用 编译插件                         ###"+ "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###               使用过程中碰到任何问题请联系我                    ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                         GitHub 地址：                        ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###     https://github.com/fanrunqi/AndroidEnhancementsPlugin   ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                                                              ###" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "###                                                              ###" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                              ##" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                   Welcome to use APlugin                     ##"+ "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##         Contact Me : https://github.com/fanrunqi/APlugin     ##" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                              ##" + "${LogUI.E_NORMAL.value}")
         println("${LogUI.C_BLACK_GREEN.value}" + "####################################################################" + "${LogUI.E_NORMAL.value}")
         println()
     }
