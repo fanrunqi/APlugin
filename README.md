@@ -1,3 +1,5 @@
+本项目将长期维护，有任何问题欢迎给我提issues
+
 ## What is APlugin ？
 
  APlugin 是一个基于[ASM](https://asm.ow2.io/) 和 [Gradle Transform API](http://tools.android.com/tech-docs/new-build-system/transform-api)的在安卓项目构建过程中处理字节码的工具包
