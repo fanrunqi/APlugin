@@ -121,7 +121,7 @@ class ClassParserVisitor extends ClassVisitor implements Opcodes {
                 if (owner == "okhttp3/OkHttpClient\$Builder"
                         && name1 == "<init>"
                         && descriptor1 == "()V"
-                        && APluginState.isMockEffect) {
+                        && APluginState.isDebugApk) {
                     println("------------------- find OkHttpClient Builder--------------------------")
                     visitTypeInsn(NEW, "cn/leo/lib_mock/MockDataInterceptor")
                     visitInsn(DUP)

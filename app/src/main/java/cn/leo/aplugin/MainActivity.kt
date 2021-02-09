@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cn.leo.aplugin.mock.MockActivity
-import cn.leo.lib_mock.MockDataManager
 import cn.leo.lib_router.Router
 import cn.leo.lib_router.annotation.Route
 

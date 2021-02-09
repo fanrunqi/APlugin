@@ -1,0 +1,10 @@
+[
+  {
+    "requestUrl": "/rights/get_rights_detail",
+    "responseJson": "{\"code\":\"200\",\"data\":\"this 残阳sasa如血 response with APlugin\"}"
+  },
+  {
+    "requestUrl": "/right/get",
+    "responseJson": "you json response"
+  }
+]

@@ -47,8 +47,7 @@ dependencies {
 //    implementation project(':lib_router')
     implementation project(':module_a')
     
-    implementation project(':lib_mock')
+//    implementation project(':lib_mock')
     implementation'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
 }
