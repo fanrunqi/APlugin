@@ -18,7 +18,7 @@ import java.lang.reflect.Method
  * Description:
  */
 
-object m {
+object MockDataManager {
     private val TAG = "APlugin->Mock"
 
     private val mMap = HashMap<String, String>()
