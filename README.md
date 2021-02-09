@@ -9,8 +9,8 @@
 + [Router](https://github.com/fanrunqi/APlugin/blob/master/ROUTER_README.md): 完全通过asm实现路由跳转、全类型参数注入、拦截器配置的安卓路由工具
 > An Android tool that implements routing jump, all types of parameter injection, and interceptor configuration completely through asm
 
-+ [Mock](https://github.com/fanrunqi/APlugin/blob/master/MOCK_README.md): 基于[okhttp](https://github.com/square/okhttp)的零代码侵入的网络请求mock功能
-> Network request mock function based on [okhttp](https://github.com/square/okhttp) with zero code intrusion.
++ [Mock](https://github.com/fanrunqi/APlugin/blob/master/MOCK_README.md): 基于[okhttp](https://github.com/square/okhttp)的零代码侵入的网络请求mock工具
+> Network request mock tool based on [okhttp](https://github.com/square/okhttp) with zero code intrusion.
 
 ## How to use 
 + 在根目录的build.gradle中添加插件
