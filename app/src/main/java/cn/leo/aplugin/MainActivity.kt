@@ -1,18 +1,36 @@
 package cn.leo.aplugin
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import cn.leo.aplugin.mock.MockActivity
+import cn.leo.lib_mock.MockDataManager
 import cn.leo.lib_router.Router
 import cn.leo.lib_router.annotation.Route
 
 @Route("/MainActivity")
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("PrivateApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        findViewById<Button>(R.id.bt_mock).setOnClickListener {
+            startActivity(Intent(this@MainActivity, MockActivity::class.java))
+        }
+
+
         findViewById<Button>(R.id.bt_router).setOnClickListener {
             val list = ArrayList<String>()
             list.add("list from main")
@@ -35,5 +53,28 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+//               申请权限
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    1
+                )
+            } else {
+//              申请过权限，但是用户彻底决绝了或是手机不允许拥有此权限，执行相应的操作：
+            }
+        }
     }
 }

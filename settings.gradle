@@ -1,2 +1,3 @@
+include ':lib_mock'
 include ':app' ,':module_a' ,':lib_router' ,':plugin'
 rootProject.name = "APlugin"

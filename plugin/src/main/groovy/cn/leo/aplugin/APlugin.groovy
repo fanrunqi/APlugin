@@ -1,5 +1,6 @@
 package cn.leo.aplugin
 
+import cn.leo.aplugin.tools.APluginState
 import cn.leo.aplugin.tools.Constant
 import cn.leo.aplugin.tools.Logger
 import com.android.build.gradle.AppExtension
@@ -17,16 +18,42 @@ import org.gradle.api.Project
  */
 class APlugin implements Plugin<Project> {
     boolean isAppModule
-    boolean isAppDebugRelease
+    boolean isAppDebugBuild
 
     @Override
     void apply(Project project) {
         isAppModule = project.plugins.hasPlugin(AppPlugin.class)
-        def extension = project.extensions.getByType(BaseExtension)
+        BaseExtension extension = project.extensions.getByType(BaseExtension)
         if (extension == null) {
             Logger.error("APlugin Only support Android project")
             return
         }
+
+        buildTypeConfig(isAppModule, extension)
+
+        APluginState.readConfig()
+        if(APluginState.isPluginEnable){
+            extension.registerTransform(new ATransform(isAppModule))
+        }else {
+            return
+        }
+
+        project.repositories {
+            maven { url 'https://jitpack.io' }
+        }
+        if (APluginState.isRouterEffect) {
+            project.dependencies {
+                implementation Constant.FUNCTION_ROUTER_LIBRARY
+            }
+        } else if (APluginState.isMockEffect && isAppDebugBuild && isAppModule) {
+            project.dependencies {
+                implementation Constant.FUNCTION_MOCK_LIBRARY
+            }
+        }
+
+    }
+
+    private void buildTypeConfig(boolean isAppModule, BaseExtension extension) {
         if (isAppModule) {
             ((AppExtension) extension).applicationVariants.all { variant ->
                 def appVariant = variant as ApplicationVariant
@@ -40,25 +67,9 @@ class APlugin implements Plugin<Project> {
                         }
                     }
                 } else if (buildName.contains('debug')) {
-                    isAppDebugRelease = true
+                    isAppDebugBuild = true
                 }
             }
-        }
-
-        def disableFunctionsStr = System.properties['APlugin.disableFunctions'].toString()
-        boolean pluginEnable = false
-        project.repositories {
-            maven { url 'https://jitpack.io' }
-        }
-        if (!disableFunctionsStr.contains(Constant.FUNCTION_ROUTER)) {
-            pluginEnable = true
-            project.dependencies {
-                implementation Constant.FUNCTION_ROUTER_LIBRARY
-            }
-        }
-
-        if (pluginEnable) {
-            extension.registerTransform(new ATransform(isAppModule))
         }
     }
 

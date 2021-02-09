@@ -1,6 +1,7 @@
 package cn.leo.aplugin.parser
 
 import cn.leo.aplugin.execute.RouteExecute
+import cn.leo.aplugin.tools.APluginState
 import cn.leo.aplugin.tools.Constant
 import org.apache.http.util.TextUtils
 import org.objectweb.asm.AnnotationVisitor
@@ -103,23 +104,49 @@ class ClassParserVisitor extends ClassVisitor implements Opcodes {
     @Override
     MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         final MethodVisitor methodVisitor = super.visitMethod(access, name, descriptor, signature, exceptions)
-        if (name == "onCreate" && descriptor == "(Landroid/os/Bundle;)V") {
-            mHaveOverrideOnCreateMethod = true
-            return new AdviceAdapter(ASM7, methodVisitor, access, name, descriptor) {
+        return new AdviceAdapter(ASM7, methodVisitor, access, name, descriptor) {
 
-                @Override
-                protected void onMethodEnter() {
-                    super.onMethodEnter()
+            @Override
+            protected void onMethodEnter() {
+                super.onMethodEnter()
+                if (name == "onCreate" && descriptor == "(Landroid/os/Bundle;)V") {
+                    mHaveOverrideOnCreateMethod = true
                     injectIntentParams(methodVisitor)
                 }
             }
+
+            @Override
+            void visitMethodInsn(int opcodeAndSource, String owner, String name1, String descriptor1, boolean isInterface) {
+                super.visitMethodInsn(opcodeAndSource, owner, name1, descriptor1, isInterface)
+                if (owner == "okhttp3/OkHttpClient\$Builder"
+                        && name1 == "<init>"
+                        && descriptor1 == "()V"
+                        && APluginState.isMockEffect) {
+                    println("------------------- find OkHttpClient Builder--------------------------")
+                    visitTypeInsn(NEW, "cn/leo/lib_mock/MockDataInterceptor")
+                    visitInsn(DUP)
+                    visitMethodInsn(
+                            INVOKESPECIAL,
+                            "cn/leo/lib_mock/MockDataInterceptor",
+                            "<init>",
+                            "()V",
+                            false
+                    )
+                    visitTypeInsn(CHECKCAST, "okhttp3/Interceptor")
+                    visitMethodInsn(
+                            INVOKEVIRTUAL,
+                            "okhttp3/OkHttpClient\$Builder",
+                            "addInterceptor",
+                            "(Lokhttp3/Interceptor;)Lokhttp3/OkHttpClient\$Builder;",
+                            false
+                    )
+                }
+            }
         }
-        return methodVisitor
     }
 
     @Override
     void visitEnd() {
-
         if (!mHaveOverrideOnCreateMethod && (mFieldList.size() > 0)) {
             MethodVisitor methodVisitor = cv.visitMethod(ACC_PROTECTED, "onCreate", "(Landroid/os/Bundle;)V", null, null)
             injectIntentParams(methodVisitor)

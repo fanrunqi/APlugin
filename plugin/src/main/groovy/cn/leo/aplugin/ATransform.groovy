@@ -24,7 +24,7 @@ class ATransform extends Transform {
 
     @Override
     String getName() {
-        return "EnhancementsTransform"
+        return "APlugin_Transform"
     }
 
     @Override
@@ -36,6 +36,7 @@ class ATransform extends Transform {
     Set<? super QualifiedContent.Scope> getScopes() {
         return scopes
     }
+
 
     @Override
     boolean isIncremental() {

@@ -3,12 +3,31 @@ package cn.leo.aplugin.tools
 
 
 import org.objectweb.asm.Opcodes
-
 import java.lang.reflect.Array
 import java.lang.reflect.Field
 import java.util.concurrent.ConcurrentHashMap
 
 class Logger {
+
+    enum LogUI {
+        //color
+        C_ERROR("\033[40;31m"),
+        C_WARN("\033[40;33m"),
+        C_BLACK_GREEN("\033[7m"),
+        //end
+        E_NORMAL("\033[0m");
+
+        private final String value
+
+        LogUI(String value) {
+            this.value = value
+        }
+
+        String getValue() {
+            return this.value
+        }
+    }
+
     private static boolean debug = false
     public static ConcurrentHashMap<Integer, String> accCodeMap = new ConcurrentHashMap<>()
     public static ConcurrentHashMap<Integer, String> opCodeMap = new ConcurrentHashMap<>()
@@ -19,10 +38,10 @@ class Logger {
     static void printCopyright() {
         println()
         println("${LogUI.C_BLACK_GREEN.value}" + "####################################################################" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                              ##" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "##                   Welcome to use APlugin                     ##"+ "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "##         Contact Me : https://github.com/fanrunqi/APlugin     ##" + "${LogUI.E_NORMAL.value}")
-        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                              ##" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                                ##" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                   Welcome to use APlugin                       ##"+ "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##         Contact Me : https://github.com/fanrunqi/APlugin       ##" + "${LogUI.E_NORMAL.value}")
+        println("${LogUI.C_BLACK_GREEN.value}" + "##                                                                ##" + "${LogUI.E_NORMAL.value}")
         println("${LogUI.C_BLACK_GREEN.value}" + "####################################################################" + "${LogUI.E_NORMAL.value}")
         println()
     }

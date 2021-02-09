@@ -9,8 +9,8 @@ interface Constant {
     String JAR_MODIFY_CLASS_METHOD_NAME_INJECT_ROUTER_LIST = "injectRouterList"
     String JAR_MODIFY_CLASS_METHOD_NAME_INJECT_INTERCEPTOR_LIST = "injectInterceptorList"
 
-    String FUNCTION_ROUTER = "router"
     String FUNCTION_ROUTER_LIBRARY = 'com.github.fanrunqi.APlugin:lib_router:+'
     String FUNCTION_ROUTER_JAR_INPUT_MATCH_SUFFIX = "lib_router"
-    String FUNCTION_MOCK = "mock"
+
+    String FUNCTION_MOCK_LIBRARY = 'com.github.fanrunqi.APlugin:lib_mock:+'
 }

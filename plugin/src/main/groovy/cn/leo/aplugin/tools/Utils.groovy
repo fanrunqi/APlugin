@@ -2,6 +2,12 @@ package cn.leo.aplugin.tools
 
 import com.android.SdkConstants
 
+/**
+ * author: leo
+ * email: fanrunqi@qq.com
+ * creation time: 2021/2/8 16:49
+ * description:
+ */
 class Utils{
 
     static boolean isNeedClassFile(File file) {
