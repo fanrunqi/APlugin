@@ -12,6 +12,8 @@ class APluginState {
     static String FUNCTION_ROUTER = "router"
     static String FUNCTION_MOCK = "mock"
 
+    static boolean isDebugApk = true
+
     static boolean isPluginEnable = true
 
     static boolean isRouterEffect = true

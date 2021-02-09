@@ -18,23 +18,47 @@ import org.gradle.api.Project
  */
 class APlugin implements Plugin<Project> {
     boolean isAppModule
-    boolean isAppDebugBuild
 
     @Override
     void apply(Project project) {
-        isAppModule = project.plugins.hasPlugin(AppPlugin.class)
+        isAppModule = project.plugins.hasPlugin(AppPlugin)
+        println(" isAppModule =" + isAppModule)
+
         BaseExtension extension = project.extensions.getByType(BaseExtension)
         if (extension == null) {
             Logger.error("APlugin Only support Android project")
             return
         }
 
-        buildTypeConfig(isAppModule, extension)
+        if (isAppModule) {
+            ((AppExtension) extension).applicationVariants.all { variant ->
+                def appVariant = variant as ApplicationVariant
+                def buildName = appVariant.buildType.name.toLowerCase()
+                if (buildName.contains('release')) {
+                    appVariant.mergeAssetsProvider.get().doLast {
+                        println("isAppModule $isAppModule isAppDebugBuild set false")
+                        APluginState.isDebugApk = false
+                        appVariant.mergeAssetsProvider.get().outputDir.get().asFileTree.each { file ->
+                            println("file name=" + file.name)
+                            if (file.name == 'OkHttpMock.json') {
+                                file.delete()
+                            }
+                        }
+                    }
+                } else if (buildName.contains('debug')) {
+                    appVariant.mergeAssetsProvider.get().doLast {
+                        println("isAppModule $isAppModule isAppDebugBuild set true")
+                        APluginState.isDebugApk = true
+
+                    }
+                }
+            }
+        }
 
         APluginState.readConfig()
-        if(APluginState.isPluginEnable){
+        if (APluginState.isPluginEnable) {
             extension.registerTransform(new ATransform(isAppModule))
-        }else {
+        } else {
             return
         }
 
@@ -45,32 +69,13 @@ class APlugin implements Plugin<Project> {
             project.dependencies {
                 implementation Constant.FUNCTION_ROUTER_LIBRARY
             }
-        } else if (APluginState.isMockEffect && isAppDebugBuild && isAppModule) {
+        }
+        if (APluginState.isMockEffect && isAppModule) {
             project.dependencies {
                 implementation Constant.FUNCTION_MOCK_LIBRARY
             }
         }
-
-    }
-
-    private void buildTypeConfig(boolean isAppModule, BaseExtension extension) {
-        if (isAppModule) {
-            ((AppExtension) extension).applicationVariants.all { variant ->
-                def appVariant = variant as ApplicationVariant
-                def buildName = appVariant.buildType.name.toLowerCase()
-                if (buildName.contains('release')) {
-                    appVariant.mergeAssetsProvider.get().doLast {
-                        appVariant.mergeAssetsProvider.get().outputDir.listFiles().each { file ->
-                            if (file.name == 'RetrofitMock.json') {
-                                file.delete()
-                            }
-                        }
-                    }
-                } else if (buildName.contains('debug')) {
-                    isAppDebugBuild = true
-                }
-            }
-        }
+        println("APluginState.isMockEffect =" + APluginState.isMockEffect + " isAppModule=" + isAppModule)
     }
 
 }
