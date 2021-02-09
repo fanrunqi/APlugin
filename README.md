@@ -10,8 +10,26 @@
 + Mock: 基于[okhttp](https://github.com/square/okhttp)的零代码侵入的网络请求mock功能
 > Network request mock function based on [okhttp](https://github.com/square/okhttp) with zero code intrusion.
 
-## License
+## How to use 
++ 在根目录的build.gradle中添加插件
+> Add the plugin in the build.gradle of the root directory
+```
+buildscript {
+    repositories {
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+    dependencies {
+        classpath 'com.github.fanrunqi.APlugin:aplugin:0.08'
+    }
+}
 
+```
+然后点击Features中具体功能，查看如何使用
+> Then click on the specific function in Features to see usage details
+
+## License
 
     Copyright 2021 fanrunqi
 
