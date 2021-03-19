@@ -1,4 +1,3 @@
-本项目将长期维护，有任何问题欢迎给我提issues
 
 ## What is APlugin ？
 
